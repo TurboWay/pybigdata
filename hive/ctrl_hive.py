@@ -3,7 +3,7 @@
 # @Time : 2020/5/27 17:23
 # @Author : way
 # @Site : 
-# @Describe: 操作 hive , windows 下可能会有环境问题，参考 https://www.aitolearn.com/article/9a06a8e1ff5e4252aa2373eb3cc4fed8
+# @Describe: 操作 hive , windows 下可能会有环境问题，参考 https://www.cnblogs.com/TurboWay/p/12975034.html
 
 from impala.dbapi import connect
 
