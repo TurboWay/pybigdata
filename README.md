@@ -8,7 +8,7 @@ python 有很多优秀的第三方包，可以用来操作大数据的各种组�
 - [x] hdfs
 - [x] hbase
 - [x] impala
-- [ ] hive
+- [x] hive
 - [x] kafka
 - [ ] spark
 - [ ] elasticsearch
