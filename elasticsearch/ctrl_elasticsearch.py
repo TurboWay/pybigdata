@@ -20,11 +20,11 @@ print(es.cluster.client.info())  # 当前节点信息
 print(es.cat.indices())  # 索引信息 实例es的 cat 属性可以得到更多信息
 """
 
-# 创建index
+# 创建index  新增数据时，索引不存在时，也会被自动创建
 response = es.indices.create(index=index_name, ignore=400)  # 已存在则ignore
 print(response)
 
-data = {'name': '肥仔', 'age': 29}
+data = {'name': '肥仔', 'age': 28}
 
 # 新增数据(指定id, id已存在则报错)
 response = es.create(index=index_name, doc_type=type_name, body=data, id=1)
@@ -47,7 +47,8 @@ query = {
     'query': {'match': {'age': 28}}
 }
 response = es.search(index=index_name, doc_type=type_name, body=query)
-print(response)
+# response = es.search()   # 也可以不加任何条件..
+print(response['hits'])
 
 # 删除指定id数据
 response = es.delete(index=index_name, doc_type=type_name, id=1, ignore=404)  # id不存在则ignore
@@ -59,5 +60,5 @@ response = es.delete_by_query(index=index_name, doc_type=type_name, body=query_a
 print(response)
 
 # 删除index
-response = es.indices.delete(index=index_name, ignore=[400, 404])  # 索引不存在则ignore
+response = es.indices.delete(index=index_name, ignore=404)  # 索引不存在则ignore
 print(response)
