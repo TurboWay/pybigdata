@@ -7,7 +7,7 @@
 
 from elasticsearch import Elasticsearch
 
-es = Elasticsearch(["127.0.0.1"], port=9200)
+es = Elasticsearch(["127.0.0.1:9200"])
 
 index_name = 'test'
 type_name = 'human'
