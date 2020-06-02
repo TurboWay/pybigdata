@@ -5,7 +5,7 @@
 # @Site : 
 # @Describe: 操作 elasticsearch  官方文档 https://elasticsearch-py.readthedocs.io/en/master/
 
-from elasticsearch import Elasticsearch
+from elasticsearch import Elasticsearch, helpers
 
 es = Elasticsearch(["127.0.0.1:9200"])
 
@@ -62,3 +62,14 @@ print(response)
 # 删除index
 response = es.indices.delete(index=index_name, ignore=404)  # 索引不存在则ignore
 print(response)
+
+# 批量操作 写入
+actions = []
+for i in range(9):
+    action = {'_op_type': 'index',  # 操作 index update create delete  
+              '_index': index_name,  # index
+              '_id': i,  # 不指定id,则自动生成id
+              '_type': type_name,  # type
+              '_source': {'name': '肥仔', 'age': i}}
+    actions.append(action)
+helpers.bulk(es, actions=actions)
