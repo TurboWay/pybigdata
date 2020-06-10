@@ -9,6 +9,6 @@ python 操作大数据的各种组件
 - [x] impala
 - [x] hive
 - [x] kafka
-- [ ] spark
+- [x] spark
 - [x] elasticsearch
 - [ ] flink
