@@ -79,8 +79,6 @@ CREATE TABLE user_behavior (
 SELECT * FROM user_behavior;
 ```
 
-![image-20201201175150700](https://gitee.com/TurboWay/blogimg/raw/master/img/image-20201201175150700.png)
-
 ## 2.2 指标统计：每小时成交量
 
 ### 2.2.1 创建 es 结果表， 存放每小时的成交量
@@ -101,8 +99,6 @@ CREATE TABLE buy_cnt_per_hour (
 );
 ```
 
-![image-20201201175234650](https://gitee.com/TurboWay/blogimg/raw/master/img/image-20201201175234650.png)
-
 ### 2.2.2 执行 sql ，统计每小时的成交量
 
 ```sql
@@ -112,10 +108,6 @@ FROM user_behavior
 WHERE behavior = 'buy'
 GROUP BY TUMBLE(ts, INTERVAL '1' HOUR);
 ```
-
-![image-20201127132706814](https://gitee.com/TurboWay/blogimg/raw/master/img/image-20201127132706814.png)
-
-![image-20201127132835393](https://gitee.com/TurboWay/blogimg/raw/master/img/image-20201127132835393.png)
 
 ## 2.3 指标统计：每10分钟累计独立用户数
 
