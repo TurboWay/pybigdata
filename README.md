@@ -13,4 +13,5 @@ python 操作大数据的各种组件
 - [x] kafka
 - [x] spark
 - [x] elasticsearch
-- [ ] flink
+- [x] flink
+- [x] flink-sql
