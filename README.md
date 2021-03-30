@@ -1,9 +1,9 @@
 # pybigdata
 ![](https://img.shields.io/badge/python-3.6%2B-brightgreen)
 
-做大数据应用需要学习什么编程语言，一定要学 java 吗，不，python 也是一个很好的选择。
+做大数据应用需要学习什么编程语言，一定要学 java 吗，不，python 也是一个很好的选择
 
-所以，怎么用 python 实现大数据开发呢，这里或许可以给你提供一些方向。
+所以，一起用 python 来玩转大数据吧
 
 
 
