@@ -10,7 +10,7 @@ from operator import add
 
 # 每个程序只能有一个 SparkContext
 sc = SparkContext("local", "test")
-# sc = SparkContext("yarn", "test")   # 提交到 yarn 执行
+# sc = SparkContext("spark://host:port", "test")   # 提交到 spark 远程执行
 
 words = sc.parallelize(
     ["scala",

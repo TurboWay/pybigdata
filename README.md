@@ -27,5 +27,5 @@ pip install --no-deps thrift-sasl==0.2.1
 | hbase         |  [ctrl_hbase.py](hbase/ctrl_hbase.py)             | [happybase](https://happybase.readthedocs.io/en/latest/user.html#retrieving-data) |
 | kafka         |  [demo_producer.py](kafka/demo_producer.py) <br> [demo_consumer.py](kafka/demo_consumer.py)        | [kafka](https://kafka-python.readthedocs.io/en/master/) |
 | elasticsearch |  [ctrl_elasticsearch.py](elasticsearch/ctrl_elasticsearch.py)              | [elasticsearch](https://elasticsearch-py.readthedocs.io/en/7.7.1/) |
-| spark         |  [demo_spark.py](spark/demo_spark.py)              | [spark](http://spark.apache.org/examples.html)                |
+| spark         |  [demo_spark.py](spark/demo_spark.py)              | [pyspark](http://spark.apache.org/docs/latest/api/python/getting_started/index.html)                |
 | flink         |  [flink-sql](flink/flink-sql)           |  [flink 实践系列2-flinksql](http://blog.turboway.top/article/flinksql/)                |
