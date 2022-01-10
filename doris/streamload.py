@@ -25,6 +25,7 @@ class DorisSession:
             'Expect': '100-continue',
             'Authorization': 'Basic ' + self.Authorization,
             'format': 'json',
+            'strip_outer_array': 'true'
         }
 
     def send(self, data, url=None):
@@ -55,9 +56,10 @@ if __name__ == "__main__":
         user='',
         pwd=''
     )
-    json_data = {
-        'dateid': '20211014', 'shop_code': 'sdd', 'sale_amount': '1'
-    }
+    json_data = [
+        {'dateid': '20211014', 'shop_code': 'sdd', 'sale_amount': '1'},
+        {'dateid': '20211016', 'shop_code': 'sdd', 'sale_amount': '5'},
+    ]
     json_data = json.dumps(json_data)
     doris.send(json_data)
 
