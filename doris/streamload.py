@@ -25,22 +25,25 @@ class DorisSession:
             'Expect': '100-continue',
             'Authorization': 'Basic ' + self.Authorization,
             'format': 'json',
-            'strip_outer_array': 'true'
+            'strip_outer_array': 'true',
+            'fuzzy_parse': 'true'
         }
 
-    def send(self, data, url=None):
-        if url is None:
-            url = self.url
-        response = self.sesson.put(url, data, allow_redirects=False)
+    def get_be(self):
+        response = self.sesson.put(self.url, '', allow_redirects=False)
         if response.status_code == 307:
-            url = response.headers['Location']
-            self.send(data, url)
-        elif response.status_code == 200:
+            return response.headers['Location']
+
+    def send(self, data):
+        url = self.get_be()  # doris fe 转发有bug，需要处理307
+        response = self.sesson.put(url, data, allow_redirects=False)
+        if response.status_code == 200:
             res = response.json()
-            if res['Status'] == 'Success':
+            if res.get('Status') == 'Success':
+                print(res)
                 return True
             else:
-                print(f"fail: {res['Message']}")
+                print(f"fail: {res}")
                 return False
         else:
             print(f"error: {response.text}")
