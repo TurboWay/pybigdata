@@ -2,9 +2,10 @@
 # -*- coding: utf-8 -*-
 # @Time : 2022/1/10 10:24
 # @Author : way
-# @Site : 
+# @Site :
 # @Describe: doris 数据导入
 
+import time
 import base64
 import json
 from requests import Session
@@ -20,14 +21,20 @@ class DorisSession:
     def __init__(self, host, port, database, table, user, pwd):
         self.Authorization = base64.b64encode((user + ':' + pwd).encode('utf-8')).decode('utf-8')
         self.url = f'http://{host}:{port}/api/{database}/{table}/_stream_load'
+        self.table = table
         self.sesson = Session()
         self.sesson.headers = {
             'Expect': '100-continue',
             'Authorization': 'Basic ' + self.Authorization,
             'format': 'json',
-            'strip_outer_array': 'true',
-            'fuzzy_parse': 'true'
+            'strip_outer_array': 'true', # json数组
+            'fuzzy_parse': 'true',  # 数组中每一行的字段顺序完全一致,加速导入速度
+            'function_column.sequence_col': 'source_sequence',  # 保证数据顺序, 需启用 Sequence Column 功能, 详见 http://palo.baidu.com/docs/操作手册/数据更新与删除/Sequence-Column
         }
+
+    @property
+    def label(self):
+        return f"{self.table}_{time.strftime('%Y%m%d_%H%M%S', time.localtime())}"
 
     def get_be(self):
         response = self.sesson.put(self.url, '', allow_redirects=False)
@@ -36,7 +43,9 @@ class DorisSession:
 
     def send(self, data):
         url = self.get_be()  # doris fe 转发有bug，需要处理307
-        response = self.sesson.put(url, data, allow_redirects=False)
+        self.sesson.headers['label'] = self.label
+        self.sesson.headers['columns'] = ','.join(data[0].keys())
+        response = self.sesson.put(url, json.dumps(json_data), allow_redirects=False)
         if response.status_code == 200:
             res = response.json()
             if res.get('Status') == 'Success':
@@ -55,14 +64,14 @@ if __name__ == "__main__":
         host='',
         port=8030,
         database='',
-        table='',
+        table='test',
         user='',
         pwd=''
     )
     json_data = [
-        {'dateid': '20211014', 'shop_code': 'sdd', 'sale_amount': '1'},
-        {'dateid': '20211016', 'shop_code': 'sdd', 'sale_amount': '5'},
+        {'dateid': '20211014', 'shop_code': 'sdd', 'sale_amount': '100', 'source_sequence':14},
+        {'dateid': '20211014', 'shop_code': 'sdd', 'sale_amount': '4', 'source_sequence': 5},
+        {'dateid': '20211014', 'shop_code': 'sdd', 'sale_amount': '3', 'source_sequence': 2},
     ]
-    json_data = json.dumps(json_data)
     doris.send(json_data)
 
