@@ -45,7 +45,7 @@ class DorisSession:
         url = self.get_be()  # doris fe 转发有bug，需要处理307
         self.sesson.headers['label'] = self.label
         self.sesson.headers['columns'] = ','.join(data[0].keys())
-        response = self.sesson.put(url, json.dumps(json_data), allow_redirects=False)
+        response = self.sesson.put(url, json.dumps(data), allow_redirects=False)
         if response.status_code == 200:
             res = response.json()
             if res.get('Status') == 'Success':
