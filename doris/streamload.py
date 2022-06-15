@@ -98,7 +98,7 @@ class DorisSession:
             raise Exception(f"执行失败，获取不到可用的BE节点，请检查 fe servers 配置")
 
     @retry
-    def insertdb(self, table, data):
+    def send(self, table, data):
         url = self._get_be(table)
         self.sesson.headers['label'] = self._label(table)
         self.sesson.headers['columns'] = self._columns(data[0].keys())
@@ -136,4 +136,4 @@ if __name__ == "__main__":
         {'dateid': '20211014', 'shop_code': 'sdd2', 'sale_amount': '5', 'source_sequence': 2, 'delete_flag': 0},
         {'dateid': '20211014', 'shop_code': 'sdd3', 'sale_amount': '3', 'source_sequence': 1, 'delete_flag': 1},
     ]
-    doris.insertdb('streamload_test', json_data)
+    doris.send('streamload_test', json_data)
