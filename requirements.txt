@@ -3,6 +3,7 @@ bitarray==1.2.2
 certifi==2020.4.5.1
 chardet==3.0.4
 docopt==0.6.2
+DorisClient==0.1.6
 elasticsearch==7.7.1
 happybase==1.2.0
 hdfs==2.5.8
