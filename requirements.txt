@@ -10,7 +10,7 @@ hdfs==2.5.8
 idna==2.9
 impyla==0.16.2
 kafka-python==2.0.2
-numpy==1.19.5
+numpy==1.21.0
 pandas==1.1.5
 ply==3.11
 psutil==5.8.0
