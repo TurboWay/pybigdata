@@ -1,6 +1,6 @@
 bit-array==0.1.0
 bitarray==1.2.2
-certifi==2020.4.5.1
+certifi==2022.12.7
 chardet==3.0.4
 docopt==0.6.2
 DorisClient==0.1.10
